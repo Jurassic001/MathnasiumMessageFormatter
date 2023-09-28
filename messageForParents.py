@@ -42,7 +42,7 @@ def getTopics():
     for i in range(len(topicList)):
         # Format the given topics into a neat sentence
         if i + 1 == len(topicList):
-            topics = topics + "and " + topicList[i] + ". "
+            topics = topics + "and " + topicList[i] + "."
             return topics
         else:
             topics = topics + topicList[i] + ", "
@@ -66,7 +66,7 @@ def assessmentCheck():
                 output(assessMessage)
         else:
             # Worked on the assessment, did not finish it
-            assessMessage = message_greet + name + " had a good session today! " + gender + " worked on an assessment for the whole session and " + gender.lower() + " was pretty focused. " + gender.lower() + "'ll keep working on it next time." + message_end
+            assessMessage = message_greet + name + " had a good session today! " + gender + " worked on an assessment for the whole session and " + gender.lower() + " was pretty focused. " + gender + "'ll keep working on it next time." + message_end
             output(assessMessage)
 
 
@@ -88,9 +88,9 @@ masChecks = int(input("Mastery checks finished: "))
 if masChecks == 0:
     mastery = ""
 if masChecks == 1:
-    mastery = gender + " also completed one mastery check over those topics!"
+    mastery = " " + gender + " also completed one mastery check over those topics!"
 else:
-    mastery = gender + " also completed " + str(masChecks) + " mastery checks over those topics!"
+    mastery = " " + gender + " also completed " + str(masChecks) + " mastery checks over those topics!"
 
 
 # Organize all of our collected information and ship it out
