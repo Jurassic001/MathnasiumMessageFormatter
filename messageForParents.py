@@ -2,7 +2,7 @@ import pyperclip
 import time
 
 # If you want to download this for personal use you'll need to change the instructor name
-instructor_name = "<Your Name Here>"
+instructor_name = "Max Haberer"
 
 # Set up key phrases that we'll be needing
 message_greet = "Good Afternoon! This is " + instructor_name + " from Mathnasium. "
