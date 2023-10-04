@@ -26,26 +26,33 @@ def output(msg):
 # This function asks for all the topics that the student worked on and returns a formatted string that lists them out
 def getTopics():
     topicList = []
-    topicNum = 0
+    topicNum = 1
     topics = ""
     print("Enter the name of a topic the student worked on")
     print("or")
     print("Type DONE to print message to parent")
     while True:
         # Keep asking for topics until the user enters DONE
-        topicNum += 1
         topic = str(input("Topic #" + str(topicNum) + ": "))
         if topic == "DONE":
             break
         else:
             topicList.append(topic)
-    for i in range(len(topicList)):
-        # Format the given topics into a neat sentence
-        if i + 1 == len(topicList):
-            topics = topics + "and " + topicList[i] + "."
-            return topics
-        else:
-            topics = topics + topicList[i] + ", "
+            topicNum += 1
+    if len(topicList) == 1:
+        topics = topicList[0] + "."
+        return topics
+    elif len(topicList) == 2:
+        topics = topicList[0] + " and " + topicList[1] + "."
+        return topics
+    else:
+        for i in range(len(topicList)):
+            # Format the given topics into a neat sentence
+            if i + 1 == len(topicList):
+                topics = topics + "and " + topicList[i] + "."
+                return topics
+            else:
+                topics = topics + topicList[i] + ", "
 
 
 # This function asks if the student had an assessment, asks if they finished the assessment, and then gives an appropriate response.
@@ -87,7 +94,7 @@ masChecks = int(input("Mastery checks finished: "))
 # Format the mastery check information so it looks nice :)
 if masChecks == 0:
     mastery = ""
-if masChecks == 1:
+elif masChecks == 1:
     mastery = " " + gender + " also completed one mastery check over those topics!"
 else:
     mastery = " " + gender + " also completed " + str(masChecks) + " mastery checks over those topics!"
