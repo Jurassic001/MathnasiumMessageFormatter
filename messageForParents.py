@@ -9,7 +9,15 @@ message_greet = "Good Afternoon! This is " + instructor_name + " from Mathnasium
 message_end = " Have a great rest of your day!"
 
 
-# This function copies the message to the clipboard, prints it, and gives some small flavor text
+# This method compares strings
+def compare(str1: str, str2: str):
+    if str1.__contains__(str2) or str1.__contains__(str.lower(str2)) or str1.__contains__(str.capitalize(str2)):
+        return True
+    else:
+        return False
+
+
+# This method copies the message to the clipboard, prints it, and gives some small flavor text
 def output(msg):
     pyperclip.copy(msg)
     print(msg)
@@ -23,7 +31,7 @@ def output(msg):
     exit()
 
 
-# This function asks for all the topics that the student worked on and returns a formatted string that lists them out
+# This method asks for all the topics that the student worked on and returns a formatted string that lists them out
 def getTopics():
     topicList = []
     topicNum = 1
@@ -55,15 +63,15 @@ def getTopics():
                 topics = topics + topicList[i] + ", "
 
 
-# This function asks if the student had an assessment, asks if they finished the assessment, and then gives an appropriate response.
+# This method asks if the student had an assessment, asks if they finished the assessment, and then gives an appropriate response.
 # If the student finished the assessment, it'll ask if they worked on any other topics and what those topics were.
 def assessmentCheck():
     assess = str(input("Did they have an assessment? (Y/N): "))
-    if assess.__contains__("Y") or assess.__contains__("y"):
+    if compare(assess, "Y"):
         assessFinish = str(input("Did they finish it? (Y/N): "))
-        if assessFinish.__contains__("Y") or assessFinish.__contains__("y"):
+        if compare(assessFinish, "Y"):
             otherWork = str(input("Did they do any other work? (Y/N): "))
-            if otherWork.__contains__("Y") or otherWork.__contains__("y"):
+            if compare(otherWork, "Y"):
                 # Finished the assessment, worked on something else
                 assessMessage = message_greet + name + " had a good session today! " + gender + " completed an assessment during the first half of the session. " + gender + " also worked on " + getTopics() + message_end
                 output(assessMessage)
@@ -77,15 +85,28 @@ def assessmentCheck():
             output(assessMessage)
 
 
+# This method changes our response based on if the student did homework
+def homework():
+    hw = str(input("Did they do any homework? (Y/N): "))
+    if compare(hw, "Y"):
+        global hadHW
+        global hwTopics
+        hadHW = True
+        hwTopics = str(input("What was their homework about? "))
+
+
 """
 Below is where everything comes together
 """
 
+hadHW = False
 # Ask for some simple establishing information about the student
 name = str(input("Student name: "))
 gender = str(input("Is the student a He or She? "))
 # Run the assessment function to determine if they did any assessment work
 assessmentCheck()
+# Did they work on any homework?
+homework()
 # If they had a regular session then ask how many pages and mastery checks they completed
 pages = str(input("Pages finished: "))
 masChecks = int(input("Mastery checks finished: "))
@@ -101,7 +122,12 @@ else:
 
 
 # Organize all of our collected information and ship it out
-message_summary = name + " had a good session today, completing " + pages + " pages! "
-message_topics = gender + " worked on " + getTopics()
+if hadHW:
+    global hwTopics
+    message_summary = name + " had a good session today, " + gender.lower() + " worked on homework over " + hwTopics + " for the first half of the session. "
+    message_topics = "After homework " + gender.lower() + " completed " + pages + " pages over " + getTopics()
+else:
+    message_summary = name + " had a good session today, completing " + pages + " pages! "
+    message_topics = gender + " worked on " + getTopics()
 message = message_greet + message_summary + message_topics + mastery + message_end
 output(message)
