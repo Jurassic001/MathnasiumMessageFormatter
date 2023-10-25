@@ -141,7 +141,6 @@ else:
 
 # Organize all of our collected information and ship it out
 if hadHW:
-    global hwTopic
     message_summary = name + " had a good session today, " + sing.lower() + " worked on " + poss.lower() + " " + hwTopic.lower() + " homework. "
     message_topics = "After homework " + sing.lower() + " completed " + pages + " pages over " + getTopics()
 else:
