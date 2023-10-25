@@ -8,6 +8,12 @@ instructor_name = "Max Haberer"
 message_greet = "Good Afternoon! This is " + instructor_name + " from Mathnasium. "
 message_end = " Have a great rest of your day!"
 
+# Set up some of the basic variables we'll be using
+hadHW = False
+hwTopic = ""
+sing = ""
+poss = ""
+
 
 # This method compares strings
 def compare(str1: str, str2: str):
@@ -73,15 +79,15 @@ def assessmentCheck():
             otherWork = str(input("Did they do any other work? (Y/N): "))
             if compare(otherWork, "Y"):
                 # Finished the assessment, worked on something else
-                assessMessage = message_greet + name + " had a good session today! " + gender + " completed an assessment during the first half of the session. " + gender + " also worked on " + getTopics() + message_end
+                assessMessage = message_greet + name + " had a good session today! " + sing + " completed an assessment during the first half of the session. " + sing + " also worked on " + getTopics() + message_end
                 output(assessMessage)
             else:
                 # Finished the assessment, that was all they did
-                assessMessage = message_greet + name + " had a good session today! " + gender + " worked on an assessment for the whole session and finished it. " + gender + " worked super hard and was very focused on the assessment." + message_end
+                assessMessage = message_greet + name + " had a good session today! " + sing + " worked on an assessment for the whole session and finished it. " + sing + " worked super hard and was very focused on the assessment." + message_end
                 output(assessMessage)
         else:
             # Worked on the assessment, did not finish it
-            assessMessage = message_greet + name + " had a good session today! " + gender + " worked on an assessment for the whole session and " + gender.lower() + " was pretty focused. " + gender + "'ll keep working on it next time." + message_end
+            assessMessage = message_greet + name + " had a good session today! " + sing + " worked on an assessment for the whole session and " + sing.lower() + " was pretty focused. " + sing + "'ll keep working on it next time." + message_end
             output(assessMessage)
 
 
@@ -90,19 +96,31 @@ def homework():
     hw = str(input("Did they do any homework? (Y/N): "))
     if compare(hw, "Y"):
         global hadHW
-        global hwTopics
+        global hwTopic
         hadHW = True
-        hwTopics = str(input("What was their homework about? "))
+        hwTopic = str(input("What was their homework about? "))
+
+
+# This method gets student pronouns
+def gender():
+    global sing
+    global poss
+    sing = str(input("Is the student a He or She? "))
+    if compare(sing, "He"):
+        sing = str("He")
+        poss = str("His")
+    elif compare(sing, "She"):
+        sing = str("She")
+        poss = str("Her")
 
 
 """
 Below is where everything comes together
 """
 
-hadHW = False
 # Ask for some simple establishing information about the student
 name = str(input("Student name: "))
-gender = str(input("Is the student a He or She? "))
+gender()
 # Run the assessment function to determine if they did any assessment work
 assessmentCheck()
 # Did they work on any homework?
@@ -116,18 +134,18 @@ masChecks = int(input("Mastery checks finished: "))
 if masChecks == 0:
     mastery = ""
 elif masChecks == 1:
-    mastery = " " + gender + " also completed one mastery check over those topics!"
+    mastery = " " + sing + " also completed one mastery check over those topics!"
 else:
-    mastery = " " + gender + " also completed " + str(masChecks) + " mastery checks over those topics!"
+    mastery = " " + sing + " also completed " + str(masChecks) + " mastery checks over those topics!"
 
 
 # Organize all of our collected information and ship it out
 if hadHW:
-    global hwTopics
-    message_summary = name + " had a good session today, " + gender.lower() + " worked on homework over " + hwTopics + " for the first half of the session. "
-    message_topics = "After homework " + gender.lower() + " completed " + pages + " pages over " + getTopics()
+    global hwTopic
+    message_summary = name + " had a good session today, " + sing.lower() + " worked on " + poss.lower() + " " + hwTopic.lower() + " homework. "
+    message_topics = "After homework " + sing.lower() + " completed " + pages + " pages over " + getTopics()
 else:
     message_summary = name + " had a good session today, completing " + pages + " pages! "
-    message_topics = gender + " worked on " + getTopics()
+    message_topics = sing + " worked on " + getTopics()
 message = message_greet + message_summary + message_topics + mastery + message_end
 output(message)
