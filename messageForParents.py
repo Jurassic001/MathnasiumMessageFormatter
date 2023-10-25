@@ -45,7 +45,7 @@ def getTopics():
         if topic == "DONE":
             break
         else:
-            topicList.append(topic)
+            topicList.append(topic.lower())
             topicNum += 1
     if len(topicList) == 1:
         topics = topicList[0] + "."
