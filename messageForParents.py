@@ -17,7 +17,7 @@ poss = ""
 
 # This method compares strings
 def compare(str1: str, str2: str):
-    if str1.__contains__(str2) or str1.__contains__(str.lower(str2)) or str1.__contains__(str.capitalize(str2)):
+    if str1 == str2 or str1 == (str.lower(str2)) or str1 == (str.capitalize(str2)):
         return True
     else:
         return False
