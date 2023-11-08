@@ -112,6 +112,9 @@ def gender():
     elif compare(sing, "She"):
         sing = str("She")
         poss = str("Her")
+    else:
+        sing = str("They")
+        poss = str("Their")
 
 
 """
@@ -141,7 +144,7 @@ else:
 
 # Organize all of our collected information and ship it out
 if hadHW:
-    message_summary = name + " had a good session today, " + sing.lower() + " worked on " + poss.lower() + " " + hwTopic.lower() + " homework. "
+    message_summary = name + " had a good session today, " + sing.lower() + " made good progress over " + poss.lower() + " " + hwTopic.lower() + " homework. "
     message_topics = "After homework " + sing.lower() + " completed " + pages + " pages over " + getTopics()
 else:
     message_summary = name + " had a good session today, completing " + pages + " pages! "
