@@ -156,7 +156,15 @@ else:
     message_summary = name + session_status + "completing " + pages + " pages! "
     message_topics = sing + " worked on " + getTopics()
 
+# Add additional comments if you have any
 comments = input("Please add any additional comments about the session: ")
 
-message = message_greet + message_summary + message_topics + mastery + " " + comments +  message_end
+# Check if any comments were submitted and add a space for formatting if comments were submitted.
+alphaList = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+for i in range (len(alphaList)):
+    if comments.__contains__(alphaList[i]):
+        comments = " " + comments
+        break
+
+message = message_greet + message_summary + message_topics + mastery + comments +  message_end
 output(message)
