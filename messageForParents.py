@@ -32,8 +32,8 @@ def output(msg):
     time.sleep(1)
     print("Message to parent copied to clipboard!")
     time.sleep(2)
-    print("Closing window in 3 seconds...")
-    time.sleep(3)
+    print("Closing window...")
+    time.sleep(0.5)
     exit()
 
 
