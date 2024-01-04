@@ -129,7 +129,7 @@ assessmentCheck()
 # Did they work on any homework?
 homework()
 # If they had a regular session then ask how many pages and mastery checks they completed
-pages = str(input("Pages finished: "))
+pages = int(input("Pages finished: "))
 masChecks = int(input("Mastery checks finished: "))
 
 
@@ -141,13 +141,19 @@ elif masChecks == 1:
 else:
     mastery = " " + sing + " also completed " + str(masChecks) + " mastery checks over those topics!"
 
+# Decide if the user had a great or a good session based on the # of pages completed (make pages a string afterwards)
+if pages >= 5:
+    session_status = " had a great session today, "
+else:
+    session_status = " had a good session today, "
+pages = str(pages)
 
 # Organize all of our collected information and ship it out
 if hadHW:
-    message_summary = name + " had a good session today, " + sing.lower() + " made good progress over " + poss.lower() + " " + hwTopic.lower() + " homework. "
+    message_summary = name + session_status + sing.lower() + " made good progress over " + poss.lower() + " " + hwTopic.lower() + " homework. "
     message_topics = "After homework " + sing.lower() + " completed " + pages + " pages over " + getTopics()
 else:
-    message_summary = name + " had a good session today, completing " + pages + " pages! "
+    message_summary = name + session_status + "completing " + pages + " pages! "
     message_topics = sing + " worked on " + getTopics()
 message = message_greet + message_summary + message_topics + mastery + message_end
 output(message)
