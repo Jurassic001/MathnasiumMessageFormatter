@@ -155,5 +155,8 @@ if hadHW:
 else:
     message_summary = name + session_status + "completing " + pages + " pages! "
     message_topics = sing + " worked on " + getTopics()
-message = message_greet + message_summary + message_topics + mastery + message_end
+
+comments = input("Please add any additional comments about the session: ")
+
+message = message_greet + message_summary + message_topics + mastery + " " + comments +  message_end
 output(message)
