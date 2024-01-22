@@ -145,7 +145,9 @@ else:
     mastery = " " + sing + " also completed " + str(masChecks) + " mastery checks over those topics!"
 
 # Decide if the user had a great or a good session based on the # of pages completed (make pages a string afterwards)
-if pages >= 5:
+if pages > 10:
+    session_status = " had an awesome session today, "
+elif pages >= 5:
     session_status = " had a great session today, "
 else:
     session_status = " had a good session today, "
