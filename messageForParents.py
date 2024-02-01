@@ -47,7 +47,7 @@ def getTopics():
     topics = ""
     print("Enter the name of a topic the student worked on")
     print("or")
-    print("Type DONE to print message to parent")
+    print("Type DONE to continue")
     while True:
         # Keep asking for topics until the user enters DONE
         topic = str(input("Topic #" + str(topicNum) + ": "))
@@ -164,12 +164,11 @@ else:
 # Add additional comments if you have any
 comments = input("Please add any additional comments about the session: ")
 
-# Check if any comments were submitted and add a space for formatting if comments were submitted.
-alphaList = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
-for i in range (len(alphaList)):
-    if comments.__contains__(alphaList[i]):
-        comments = " " + comments
-        break
+# Check if any comments were submitted, add a space for formatting if comments were submitted, and add a period if there isn't one.
+if len(comments) != 0:
+    comments = " " + comments
+    if comments[len(comments)-1] != "." and comments[len(comments)-1] != "!":
+        comments = comments + "."
 
 message = message_greet + message_summary + message_topics + mastery + comments +  message_end
 output(message)
