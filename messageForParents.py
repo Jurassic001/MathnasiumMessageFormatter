@@ -102,6 +102,8 @@ def homework():
         global hwTopic
         hadHW = True
         hwTopic = str(input("What was their homework about? "))
+        if len(hwTopic) != 0:
+            hwTopic = " " + hwTopic
 
 
 # This method gets student pronouns
@@ -155,7 +157,7 @@ pages = str(pages)
 
 # Organize all of our collected information and ship it out
 if hadHW:
-    message_summary = name + session_status + sing.lower() + " made good progress over " + poss.lower() + " " + hwTopic.lower() + " homework. "
+    message_summary = name + session_status + sing.lower() + " made good progress over " + poss.lower() + hwTopic.lower() + " homework. "
     message_topics = "After homework " + sing.lower() + " completed " + pages + " pages over " + getTopics()
 else:
     message_summary = name + session_status + "completing " + pages + " pages! "
@@ -164,7 +166,7 @@ else:
 # Add additional comments if you have any
 comments = input("Please add any additional comments about the session: ")
 
-# Check if any comments were submitted, add a space for formatting if comments were submitted, and add a period if there isn't one.
+# Check if any comments were submitted, add a space for formatting if comments were submitted, and add a period if there isn't any end punctuation.
 if len(comments) != 0:
     comments = " " + comments
     if comments[len(comments)-1] != "." and comments[len(comments)-1] != "!":
