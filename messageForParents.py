@@ -14,13 +14,14 @@ message_end = " Have a great rest of your day!"
 # Set up some of the basic variables we'll be using
 hadHW = False
 hwTopic = ""
+hwComplete = ""
 sing = ""
 poss = ""
 
 
 # This method compares strings
 def compare(str1: str, str2: str):
-    if str1 == str2 or str1 == (str.lower(str2)) or str1 == (str.capitalize(str2)):
+    if str1.lower() == str2.lower():
         return True
     else:
         return False
@@ -100,10 +101,14 @@ def homework():
     if compare(hw, "Y"):
         global hadHW
         global hwTopic
+        global hwComplete
         hadHW = True
-        hwTopic = str(input("What was their homework about? "))
-        if len(hwTopic) != 0:
-            hwTopic = " " + hwTopic
+        hwTopic = " " + str(input("What was their homework about? "))
+        hwComplete = str(input("Did the student complete their homework? (Y/N): "))
+        if compare(hwComplete, "Y"):
+            hwComplete = " finished "
+        else:
+            hwComplete = " made good progress over "
 
 
 # This method gets student pronouns
@@ -157,7 +162,7 @@ pages = str(pages)
 
 # Organize all of our collected information and ship it out
 if hadHW:
-    message_summary = name + session_status + sing.lower() + " made good progress over " + poss.lower() + hwTopic.lower() + " homework. "
+    message_summary = name + session_status + sing.lower() + hwComplete + poss.lower() + hwTopic.lower() + " homework. "
     message_topics = "After homework " + sing.lower() + " completed " + pages + " pages over " + getTopics()
 else:
     message_summary = name + session_status + "completing " + pages + " pages! "
@@ -172,5 +177,5 @@ if len(comments) != 0:
     if comments[len(comments)-1] != "." and comments[len(comments)-1] != "!":
         comments = comments + "."
 
-message = message_greet + message_summary + message_topics + mastery + comments +  message_end
+message = message_greet + message_summary + message_topics + mastery + comments + message_end
 output(message)
