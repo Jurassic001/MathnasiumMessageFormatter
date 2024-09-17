@@ -1,11 +1,10 @@
 import pyperclip
 import time
 
-# Delete this line for personal use
-from privateInfo import privateInfo
-
-# Replace "privateInfo.name" with your name for personal use
-instructor_name = privateInfo.name
+# Get the first line of the name.txt file, which (hopefully) contains the user's name
+file = open("name.txt", "r")
+instructor_name = file.readline().strip()
+file.close()
 
 # Set up key phrases that we'll be needing
 message_greet = "Good Afternoon! This is " + instructor_name + " from Mathnasium. "
@@ -75,7 +74,7 @@ def getTopics() -> str:
             topicList.append(topic.lower())
             topicNum += 1
     match len(topicList):
-        case 0: 
+        case 0:
             # If the user entered no topics return a generic message
             return "a variety of different topics. "
         case 1:
@@ -136,7 +135,7 @@ def homework():
 
 def gender():
     """This method globally sets student pronouns based on user input
-    """    
+    """
     global sing
     global poss
     sing = str(input("Is the student a He or She? "))
@@ -189,7 +188,7 @@ else:
 
 
 # Slightly alter the message if the student did homework and/or at least one page
-if hadHW and pages: 
+if hadHW and pages:
     message_summary = name + session_status + sing.lower() + hwComplete + poss.lower() + hwTopic.lower() + " homework. "
     message_topics = "After homework " + sing.lower() + " completed " + str(pages) + " pages over " + getTopics()
 elif hadHW and not pages:
