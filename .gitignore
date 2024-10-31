@@ -1,6 +1,7 @@
 # Local directories
 .vscode
 __pycache__
+.venv
 
 # HTML, CSS, and JS of a Daily Workout Plan - Will (hopefully) be used to develop a website verison of this program
 _Example DWP

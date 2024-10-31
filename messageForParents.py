@@ -59,9 +59,9 @@ def getTopics() -> str:
     Returns:
         str: A string acting as a formatted list of topics (i.e. "addition, subtraction, and multiplication.")
     """
-    topicList = []
-    topicNum = 1
-    topics = ""
+    topicList: list[str] = []
+    topicNum: int = 1
+    topics: str = ""
     print("Enter the name of a topic the student worked on")
     print("or")
     print("Type DONE to continue")
@@ -84,13 +84,8 @@ def getTopics() -> str:
             topics = topicList[0] + " and " + topicList[1] + "."
             return topics
         case _:
-            for i in range(len(topicList)):
-                # Format the given topics into a neat sentence
-                if i + 1 == len(topicList):
-                    topics = topics + "and " + topicList[i] + "."
-                    return topics
-                else:
-                    topics = topics + topicList[i] + ", "
+            topics = ", ".join(topicList[:-1]) + ", and " + topicList[-1] + "."
+            return topics
 
 
 def assessmentCheck():
